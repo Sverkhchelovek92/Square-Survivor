@@ -51,3 +51,35 @@ function update() {
     player.y = canvas.height - player.size
   }
 }
+
+// DRAW
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+  // player
+  ctx.fillStyle = player.color
+  ctx.fillRect(player.x, player.y, player.size, player.size)
+
+  ctx.strokeStyle = player.border
+  ctx.lineWidth = 2
+  ctx.strokeRect(player.x, player.y, player.size, player.size)
+
+  // UI
+  ctx.fillStyle = 'white'
+  ctx.font = '18px Arial'
+  ctx.fillText('← ↑ → ↓ — movement', 20, 30)
+}
+
+function gameLoop() {
+  update()
+  draw()
+  requestAnimationFrame(gameLoop)
+}
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
+})
+
+gameLoop()
