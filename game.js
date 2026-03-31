@@ -64,6 +64,8 @@ for (let i = 0; i < 4; i++) {
   reds.push(createMovingSquare('#ff3b3b'))
 }
 
+// UPDATE FUNCTIONS
+
 function updatePlayer() {
   if (keys.ArrowUp) player.y -= player.speed
   if (keys.ArrowDown) player.y += player.speed
@@ -82,27 +84,66 @@ function updatePlayer() {
   }
 }
 
+function updateSquares(array) {
+  for (const square of array) {
+    square.x += square.speedX
+    square.y += square.speedY
+
+    if (square.x <= 0 || square.x + square.size >= canvas.width) {
+      square.speedX *= -1
+    }
+
+    if (square.y <= 0 || square.y + square.size >= canvas.height) {
+      square.speedY *= -1
+    }
+  }
+}
+
 // DRAW
 
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
+function drawSquare(square) {
+  ctx.fillStyle = square.color
+  ctx.fillRect(square.x, square.y, square.size, square.size)
+}
 
-  // player
+function drawPlayer() {
   ctx.fillStyle = player.color
   ctx.fillRect(player.x, player.y, player.size, player.size)
 
   ctx.strokeStyle = player.border
   ctx.lineWidth = 2
   ctx.strokeRect(player.x, player.y, player.size, player.size)
+}
 
-  // UI
+function drawUI() {
   ctx.fillStyle = 'white'
   ctx.font = '18px Arial'
   ctx.fillText('← ↑ → ↓ — movement', 20, 30)
 }
 
-function gameLoop() {
+function update() {
   updatePlayer()
+  updateSquares(greens)
+  updateSquares(reds)
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+  for (const green of greens) {
+    drawSquare(green)
+  }
+
+  for (const red of reds) {
+    drawSquare(red)
+  }
+
+  drawPlayer()
+  drawUI()
+}
+
+function gameLoop() {
+  update()
   draw()
   requestAnimationFrame(gameLoop)
 }
