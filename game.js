@@ -34,7 +34,37 @@ window.addEventListener('keyup', (e) => {
   }
 })
 
-function update() {
+// ENEMIES
+
+const greens = []
+const reds = []
+
+function random(min, max) {
+  return Math.random() * (max - min) + min
+}
+
+function createMovingSquare(color) {
+  const size = random(15, 30)
+
+  return {
+    x: random(0, canvas.width - size),
+    y: random(0, canvas.height - size),
+    size,
+    color,
+    speedX: random(-2, 2),
+    speedY: random(-2, 2),
+  }
+}
+
+for (let i = 0; i < 10; i++) {
+  greens.push(createMovingSquare('#3cff6b'))
+}
+
+for (let i = 0; i < 4; i++) {
+  reds.push(createMovingSquare('#ff3b3b'))
+}
+
+function updatePlayer() {
   if (keys.ArrowUp) player.y -= player.speed
   if (keys.ArrowDown) player.y += player.speed
   if (keys.ArrowLeft) player.x -= player.speed
@@ -72,7 +102,7 @@ function draw() {
 }
 
 function gameLoop() {
-  update()
+  updatePlayer()
   draw()
   requestAnimationFrame(gameLoop)
 }
