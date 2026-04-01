@@ -120,6 +120,36 @@ function isColliding(a, b) {
   )
 }
 
+function handleCollisions() {
+  // Green Squares
+  for (let i = greens.length - 1; i >= 0; i--) {
+    if (isColliding(player, greens[i])) {
+      greens.splice(i, 1)
+
+      score += 10
+      player.size += 2
+
+      spawnGreen()
+    }
+  }
+
+  // Red Squares
+  for (let i = reds.length - 1; i >= 0; i--) {
+    if (isColliding(player, reds[i])) {
+      reds.splice(i, 1)
+
+      player.size -= 3
+
+      // Prevent player from dying
+      if (player.size < 10) {
+        player.size = 10
+      }
+
+      spawnRed()
+    }
+  }
+}
+
 // DRAW
 
 function drawSquare(square) {
@@ -138,14 +168,18 @@ function drawPlayer() {
 
 function drawUI() {
   ctx.fillStyle = 'white'
-  ctx.font = '18px Arial'
-  ctx.fillText('← ↑ → ↓ — movement', 20, 30)
+  ctx.font = '20px Arial'
+  ctx.fillText(`SCORE: ${score}`, 20, 35)
+
+  ctx.font = '16px Arial'
+  ctx.fillText('← ↑ → ↓ — movement', 20, 65)
 }
 
 function update() {
   updatePlayer()
   updateSquares(greens)
   updateSquares(reds)
+  handleCollisions()
 }
 
 function draw() {
