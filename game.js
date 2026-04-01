@@ -13,6 +13,8 @@ const player = {
   border: 'black',
 }
 
+let score = 0
+
 // KEYS
 
 const keys = {
@@ -44,7 +46,7 @@ function random(min, max) {
 }
 
 function createMovingSquare(color) {
-  const size = random(15, 30)
+  const size = random(18, 28)
 
   return {
     x: random(0, canvas.width - size),
@@ -56,12 +58,20 @@ function createMovingSquare(color) {
   }
 }
 
-for (let i = 0; i < 10; i++) {
+function spawnGreen() {
   greens.push(createMovingSquare('#3cff6b'))
 }
 
-for (let i = 0; i < 4; i++) {
+function spawnRed() {
   reds.push(createMovingSquare('#ff3b3b'))
+}
+
+for (let i = 0; i < 10; i++) {
+  spawnGreen()
+}
+
+for (let i = 0; i < 4; i++) {
+  spawnRed()
 }
 
 // UPDATE FUNCTIONS
@@ -97,6 +107,17 @@ function updateSquares(array) {
       square.speedY *= -1
     }
   }
+}
+
+// COLLISIONS
+
+function isColliding(a, b) {
+  return (
+    a.x < b.x + b.size &&
+    a.x + a.size > b.x &&
+    a.y < b.y + b.size &&
+    a.y + a.size > b.y
+  )
 }
 
 // DRAW
