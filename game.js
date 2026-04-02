@@ -152,11 +152,13 @@ function isColliding(a, b) {
 function handleCollisions() {
   // Green Squares
   for (let i = greens.length - 1; i >= 0; i--) {
-    if (isColliding(player, greens[i])) {
+    const green = greens[i]
+
+    if (isColliding(player, green)) {
       greens.splice(i, 1)
 
-      score += 10
-      player.size += 2
+      score += green.value
+      player.size += green.value * 0.3
 
       spawnGreen()
     }
@@ -164,12 +166,13 @@ function handleCollisions() {
 
   // Red Squares
   for (let i = reds.length - 1; i >= 0; i--) {
-    if (isColliding(player, reds[i])) {
+    const red = reds[i]
+
+    if (isColliding(player, red)) {
       reds.splice(i, 1)
 
-      player.size -= 3
+      player.size -= red.value * 2
 
-      // Prevent player from dying
       if (player.size < 10) {
         player.size = 10
       }
