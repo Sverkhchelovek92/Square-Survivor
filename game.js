@@ -120,6 +120,14 @@ function updateSquares(array) {
     square.x += square.speedX
     square.y += square.speedY
 
+    if (square.alpha < 1) {
+      square.alpha += 0.02
+
+      if (square.alpha > 1) {
+        square.alpha = 1
+      }
+    }
+
     if (square.x <= 0 || square.x + square.size >= canvas.width) {
       square.speedX *= -1
     }
@@ -174,8 +182,17 @@ function handleCollisions() {
 // DRAW
 
 function drawSquare(square) {
+  ctx.save()
+
+  ctx.globalAlpha = square.alpha
   ctx.fillStyle = square.color
   ctx.fillRect(square.x, square.y, square.size, square.size)
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.3)'
+  ctx.lineWidth = 1
+  ctx.strokeRect(square.x, square.y, square.size, square.size)
+
+  ctx.restore()
 }
 
 function drawPlayer() {
