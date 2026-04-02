@@ -46,13 +46,34 @@ function random(min, max) {
 }
 
 function createMovingSquare(color) {
-  const size = random(18, 28)
+  const variants = [
+    {
+      type: 'small',
+      size: 16,
+      value: color === '#3cff6b' ? 5 : 1,
+    },
+    {
+      type: 'medium',
+      size: 24,
+      value: color === '#3cff6b' ? 10 : 2,
+    },
+    {
+      type: 'large',
+      size: 36,
+      value: color === '#3cff6b' ? 20 : 4,
+    },
+  ]
+
+  const variant = variants[Math.floor(Math.random() * variants.length)]
 
   return {
-    x: random(0, canvas.width - size),
-    y: random(0, canvas.height - size),
-    size,
+    x: random(0, canvas.width - variant.size),
+    y: random(0, canvas.height - variant.size),
+    size: variant.size,
     color,
+    type: variant.type,
+    value: variant.value,
+    alpha: 0,
     speedX: random(-2, 2),
     speedY: random(-2, 2),
   }
