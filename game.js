@@ -303,6 +303,33 @@ function draw() {
 
   drawPlayer()
   drawUI()
+
+  if (gameOver) {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    ctx.fillStyle = 'white'
+    ctx.textAlign = 'center'
+
+    ctx.font = '48px Arial'
+    ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 20)
+
+    ctx.font = '24px Arial'
+    ctx.fillText(
+      `Final Score: ${score}`,
+      canvas.width / 2,
+      canvas.height / 2 + 30,
+    )
+
+    ctx.font = '18px Arial'
+    ctx.fillText(
+      'Refresh page to restart',
+      canvas.width / 2,
+      canvas.height / 2 + 70,
+    )
+
+    ctx.textAlign = 'left'
+  }
 }
 
 function gameLoop() {
