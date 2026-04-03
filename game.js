@@ -187,13 +187,38 @@ function handleCollisions() {
     if (isColliding(player, red)) {
       reds.splice(i, 1)
 
-      player.size -= red.value * 2
+      player.size -= red.value * 1.5
+      health -= red.value * 10
 
       if (player.size < 10) {
         player.size = 10
       }
 
+      if (health <= 0) {
+        health = 0
+        gameOver = true
+      }
+
       spawnRed()
+    }
+  }
+}
+
+// Update Level
+
+function updateLevel() {
+  if (score >= nextLevelScore) {
+    level++
+    nextLevelScore += level * 100
+
+    // New Red Spawns
+    for (let i = 0; i < 2; i++) {
+      spawnRed()
+    }
+
+    // New Green Spawns
+    while (greens.length > Math.max(3, 10 - level)) {
+      greens.pop()
     }
   }
 }
