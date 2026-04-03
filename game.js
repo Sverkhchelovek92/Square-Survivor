@@ -86,11 +86,21 @@ function createMovingSquare(color) {
 }
 
 function spawnGreen() {
-  greens.push(createMovingSquare('#3cff6b'))
+  if (greens.length < Math.max(3, 10 - level)) {
+    greens.push(createMovingSquare('#3cff6b'))
+  }
 }
 
 function spawnRed() {
-  reds.push(createMovingSquare('#ff3b3b'))
+  if (reds.length < 4 + level * 2) {
+    const red = createMovingSquare('#ff3b3b')
+
+    // Faster with each new level
+    red.speedX *= 1 + level * 0.15
+    red.speedY *= 1 + level * 0.15
+
+    reds.push(red)
+  }
 }
 
 for (let i = 0; i < 10; i++) {
