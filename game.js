@@ -15,6 +15,12 @@ const player = {
 
 let score = 0
 
+let level = 1
+let health = 100
+let gameOver = false
+
+let nextLevelScore = 100
+
 // KEYS
 
 const keys = {
