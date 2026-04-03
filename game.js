@@ -252,16 +252,42 @@ function drawUI() {
   ctx.fillStyle = 'white'
   ctx.font = '20px Arial'
   ctx.fillText(`SCORE: ${score}`, 20, 35)
+  ctx.fillText(`LEVEL: ${level}`, 20, 65)
 
-  ctx.font = '16px Arial'
-  ctx.fillText('← ↑ → ↓ — movement', 20, 65)
+  // Health bar
+  ctx.fillStyle = '#444'
+  ctx.fillRect(20, 80, 200, 20)
+
+  let healthColor = '#3cff6b'
+
+  if (health < 60) healthColor = '#ffd93c'
+  if (health < 30) healthColor = '#ff3b3b'
+
+  ctx.fillStyle = healthColor
+  ctx.fillRect(20, 80, health * 2, 20)
+
+  ctx.strokeStyle = 'white'
+  ctx.lineWidth = 2
+  ctx.strokeRect(20, 80, 200, 20)
+
+  ctx.fillStyle = 'white'
+  ctx.font = '14px Arial'
+  ctx.fillText(`HEALTH: ${Math.floor(health)} / 100`, 25, 95)
+
+  ctx.fillText('← ↑ → ↓ — movement', 20, 125)
 }
 
 function update() {
+  if (gameOver) return
+
   updatePlayer()
   updateSquares(greens)
   updateSquares(reds)
   handleCollisions()
+  updateLevel()
+
+  spawnGreen()
+  spawnRed()
 }
 
 function draw() {
