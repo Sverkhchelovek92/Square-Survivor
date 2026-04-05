@@ -21,6 +21,9 @@ let gameOver = false
 
 let nextLevelScore = 100
 
+let healthPack = null
+let nextHealthPackScore = 250
+
 // KEYS
 
 const keys = {
@@ -109,6 +112,17 @@ for (let i = 0; i < 10; i++) {
 
 for (let i = 0; i < 4; i++) {
   spawnRed()
+}
+
+// HealthPack
+
+function spawnHealthPack() {
+  healthPack = {
+    x: random(40, canvas.width - 40),
+    y: random(40, canvas.height - 40),
+    size: 26,
+    lifeTime: 600,
+  }
 }
 
 // UPDATE FUNCTIONS
