@@ -225,6 +225,17 @@ function handleCollisions() {
       spawnRed()
     }
   }
+
+  // Health Pack
+  if (healthPack && isColliding(player, healthPack)) {
+    health += 35
+
+    if (health > 100) {
+      health = 100
+    }
+
+    healthPack = null
+  }
 }
 
 // Update Level
@@ -300,6 +311,26 @@ function drawUI() {
   ctx.fillText('← ↑ → ↓ — movement', 20, 125)
 }
 
+function drawHealthPack() {
+  if (!healthPack) return
+
+  ctx.fillStyle = 'white'
+
+  ctx.fillRect(
+    healthPack.x + healthPack.size / 3,
+    healthPack.y,
+    healthPack.size / 3,
+    healthPack.size,
+  )
+
+  ctx.fillRect(
+    healthPack.x,
+    healthPack.y + healthPack.size / 3,
+    healthPack.size,
+    healthPack.size / 3,
+  )
+}
+
 function update() {
   if (gameOver) return
 
@@ -325,6 +356,7 @@ function draw() {
     drawSquare(red)
   }
 
+  drawHealthPack()
   drawPlayer()
   drawUI()
 
