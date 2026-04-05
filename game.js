@@ -174,7 +174,6 @@ function handleCollisions() {
       greens.splice(i, 1)
 
       score += green.value
-      player.size += green.value * 0.3
 
       spawnGreen()
     }
@@ -187,12 +186,7 @@ function handleCollisions() {
     if (isColliding(player, red)) {
       reds.splice(i, 1)
 
-      player.size -= red.value * 1.5
       health -= red.value * 10
-
-      if (player.size < 10) {
-        player.size = 10
-      }
 
       if (health <= 0) {
         health = 0
