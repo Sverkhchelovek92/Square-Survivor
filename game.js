@@ -168,6 +168,21 @@ function updateSquares(array) {
   }
 }
 
+function updateHealthPack() {
+  if (!healthPack && score >= nextHealthPackScore) {
+    spawnHealthPack()
+    nextHealthPackScore += 250
+  }
+
+  if (healthPack) {
+    healthPack.lifeTime--
+
+    if (healthPack.lifeTime <= 0) {
+      healthPack = null
+    }
+  }
+}
+
 // COLLISIONS
 
 function isColliding(a, b) {
@@ -291,6 +306,7 @@ function update() {
   updatePlayer()
   updateSquares(greens)
   updateSquares(reds)
+  updateHealthPack()
   handleCollisions()
   updateLevel()
 
