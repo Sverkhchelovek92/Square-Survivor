@@ -57,6 +57,24 @@ window.addEventListener('keyup', (e) => {
   }
 })
 
+window.addEventListener('mousemove', (e) => {
+  mouse.x = e.clientX
+  mouse.y = e.clientY
+})
+
+window.addEventListener('mousedown', (e) => {
+  if (e.button !== 0) return
+  if (!canShoot || gameOver) return
+
+  shoot()
+
+  canShoot = false
+
+  setTimeout(() => {
+    canShoot = true
+  }, shootCooldown)
+})
+
 // ENEMIES
 
 const greens = []
