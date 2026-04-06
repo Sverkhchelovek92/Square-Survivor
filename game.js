@@ -24,6 +24,18 @@ let nextLevelScore = 100
 let healthPack = null
 let nextHealthPackScore = 250
 
+// SHOOTING CONSTANTS
+
+const bullets = []
+
+const mouse = {
+  x: canvas.width / 2,
+  y: canvas.height / 2,
+}
+
+let canShoot = true
+const shootCooldown = 250
+
 // KEYS
 
 const keys = {
