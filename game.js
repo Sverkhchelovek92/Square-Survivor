@@ -235,6 +235,25 @@ function updateHealthPack() {
   }
 }
 
+function updateBullets() {
+  for (let i = bullets.length - 1; i >= 0; i--) {
+    const bullet = bullets[i]
+
+    bullet.x += bullet.speedX
+    bullet.y += bullet.speedY
+
+    // Delete if out of bounds
+    if (
+      bullet.x < 0 ||
+      bullet.x > canvas.width ||
+      bullet.y < 0 ||
+      bullet.y > canvas.height
+    ) {
+      bullets.splice(i, 1)
+    }
+  }
+}
+
 // COLLISIONS
 
 function isColliding(a, b) {
