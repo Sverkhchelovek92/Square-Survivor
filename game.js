@@ -307,6 +307,31 @@ function handleCollisions() {
 
     healthPack = null
   }
+
+  // Bullets
+  for (let i = bullets.length - 1; i >= 0; i--) {
+    const bullet = bullets[i]
+
+    for (let j = reds.length - 1; j >= 0; j--) {
+      const red = reds[j]
+
+      const hit =
+        bullet.x > red.x &&
+        bullet.x < red.x + red.size &&
+        bullet.y > red.y &&
+        bullet.y < red.y + red.size
+
+      if (hit) {
+        bullets.splice(i, 1)
+        reds.splice(j, 1)
+
+        score += red.value * 2
+
+        spawnRed()
+        break
+      }
+    }
+  }
 }
 
 // Update Level
@@ -351,6 +376,16 @@ function drawPlayer() {
   ctx.strokeStyle = player.border
   ctx.lineWidth = 2
   ctx.strokeRect(player.x, player.y, player.size, player.size)
+}
+
+function drawBullets() {
+  ctx.fillStyle = 'white'
+
+  for (const bullet of bullets) {
+    ctx.beginPath()
+    ctx.arc(bullet.x, bullet.y, bullet.size / 2, 0, Math.PI * 2)
+    ctx.fill()
+  }
 }
 
 function drawUI() {
@@ -407,6 +442,7 @@ function update() {
 
   updatePlayer()
   updateSquares(greens)
+  updateBullets()
   updateSquares(reds)
   updateHealthPack()
   handleCollisions()
@@ -428,6 +464,7 @@ function draw() {
   }
 
   drawHealthPack()
+  drawBullets()
   drawPlayer()
   drawUI()
 
