@@ -155,6 +155,28 @@ function spawnHealthPack() {
   }
 }
 
+// SHOOTING
+
+function shoot() {
+  const centerX = player.x + player.size / 2
+  const centerY = player.y + player.size / 2
+
+  const dx = mouse.x - centerX
+  const dy = mouse.y - centerY
+
+  const length = Math.sqrt(dx * dx + dy * dy)
+
+  const speed = 8
+
+  bullets.push({
+    x: centerX,
+    y: centerY,
+    size: 8,
+    speedX: (dx / length) * speed,
+    speedY: (dy / length) * speed,
+  })
+}
+
 // UPDATE FUNCTIONS
 
 function updatePlayer() {
