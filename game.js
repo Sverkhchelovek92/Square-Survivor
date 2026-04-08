@@ -14,6 +14,7 @@ const player = {
 }
 
 let score = 0
+let kills = 0
 
 let level = 1
 let health = 100
@@ -330,6 +331,7 @@ function handleCollisions() {
         reds.splice(j, 1)
 
         score += red.value * 2
+        kills++
 
         spawnRed()
         break
@@ -396,11 +398,12 @@ function drawUI() {
   ctx.fillStyle = 'white'
   ctx.font = '20px Arial'
   ctx.fillText(`SCORE: ${score}`, 20, 35)
-  ctx.fillText(`LEVEL: ${level}`, 20, 65)
+  ctx.fillText(`KILLS: ${kills}`, 20, 65)
+  ctx.fillText(`LEVEL: ${level}`, 20, 95)
 
   // Health bar
   ctx.fillStyle = '#444'
-  ctx.fillRect(20, 80, 200, 20)
+  ctx.fillRect(20, 110, 200, 20)
 
   let healthColor = '#3cff6b'
 
@@ -408,17 +411,17 @@ function drawUI() {
   if (health < 30) healthColor = '#ff3b3b'
 
   ctx.fillStyle = healthColor
-  ctx.fillRect(20, 80, health * 2, 20)
+  ctx.fillRect(20, 110, health * 2, 20)
 
   ctx.strokeStyle = 'white'
   ctx.lineWidth = 2
-  ctx.strokeRect(20, 80, 200, 20)
+  ctx.strokeRect(20, 110, 200, 20)
 
   ctx.fillStyle = 'white'
   ctx.font = '14px Arial'
-  ctx.fillText(`HEALTH: ${Math.floor(health)} / 100`, 25, 95)
+  ctx.fillText(`HEALTH: ${Math.floor(health)} / 100`, 25, 125)
 
-  ctx.fillText('← ↑ → ↓ — movement', 20, 125)
+  ctx.fillText('WASD / a← ↑ → ↓ — movement', 20, 155)
 }
 
 function drawHealthPack() {
@@ -488,12 +491,17 @@ function draw() {
       canvas.width / 2,
       canvas.height / 2 + 30,
     )
+    ctx.fillText(
+      `Enemies Destroyed: ${kills}`,
+      canvas.width / 2,
+      canvas.height / 2 + 65,
+    )
 
     ctx.font = '18px Arial'
     ctx.fillText(
       'Refresh page to restart',
       canvas.width / 2,
-      canvas.height / 2 + 70,
+      canvas.height / 2 + 105,
     )
 
     ctx.textAlign = 'left'
