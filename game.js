@@ -43,6 +43,10 @@ const keys = {
   ArrowDown: false,
   ArrowLeft: false,
   ArrowRight: false,
+  w: false,
+  a: false,
+  s: false,
+  d: false,
 }
 
 window.addEventListener('keydown', (e) => {
@@ -180,10 +184,10 @@ function shoot() {
 // UPDATE FUNCTIONS
 
 function updatePlayer() {
-  if (keys.ArrowUp) player.y -= player.speed
-  if (keys.ArrowDown) player.y += player.speed
-  if (keys.ArrowLeft) player.x -= player.speed
-  if (keys.ArrowRight) player.x += player.speed
+  if (keys.ArrowUp || keys.w) player.y -= player.speed
+  if (keys.ArrowDown || keys.s) player.y += player.speed
+  if (keys.ArrowLeft || keys.a) player.x -= player.speed
+  if (keys.ArrowRight || keys.d) player.x += player.speed
 
   if (player.x < 0) player.x = 0
   if (player.y < 0) player.y = 0
