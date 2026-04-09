@@ -28,6 +28,7 @@ let nextHealthPackScore = 250
 // SHOOTING CONSTANTS
 
 const bullets = []
+const particles = []
 
 const mouse = {
   x: canvas.width / 2,
@@ -120,6 +121,21 @@ function createMovingSquare(color) {
     alpha: 0,
     speedX: random(-2, 2),
     speedY: random(-2, 2),
+  }
+}
+
+function createExplosion(x, y, color, amount = 8) {
+  for (let i = 0; i < amount; i++) {
+    particles.push({
+      x,
+      y,
+      size: random(2, 5),
+      color,
+      speedX: random(-3, 3),
+      speedY: random(-3, 3),
+      alpha: 1,
+      life: random(20, 40),
+    })
   }
 }
 
