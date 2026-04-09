@@ -480,6 +480,18 @@ function drawHealthPack() {
   )
 }
 
+function drawParticles() {
+  for (const p of particles) {
+    ctx.save()
+
+    ctx.globalAlpha = p.alpha
+    ctx.fillStyle = p.color
+    ctx.fillStyle(p.x, p.y, p.size, p.size)
+
+    ctx.restore()
+  }
+}
+
 function update() {
   if (gameOver) return
 
