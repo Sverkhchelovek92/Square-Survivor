@@ -364,6 +364,14 @@ function handleCollisions() {
 
       if (hit) {
         bullets.splice(i, 1)
+
+        createExplosion(
+          red.x + red.size / 2,
+          red.y + red.size / 2,
+          red.color,
+          red.size < 20 ? 6 : red.size < 30 ? 10 : 16,
+        )
+
         reds.splice(j, 1)
 
         score += red.value * 2
@@ -486,7 +494,7 @@ function drawParticles() {
 
     ctx.globalAlpha = p.alpha
     ctx.fillStyle = p.color
-    ctx.fillStyle(p.x, p.y, p.size, p.size)
+    ctx.fillRect(p.x, p.y, p.size, p.size)
 
     ctx.restore()
   }
@@ -498,6 +506,7 @@ function update() {
   updatePlayer()
   updateSquares(greens)
   updateBullets()
+  updateParticles()
   updateSquares(reds)
   updateHealthPack()
   handleCollisions()
@@ -519,6 +528,7 @@ function draw() {
   }
 
   drawHealthPack()
+  drawParticles()
   drawBullets()
   drawPlayer()
   drawUI()
