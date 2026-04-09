@@ -275,6 +275,26 @@ function updateBullets() {
   }
 }
 
+function updateParticles() {
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i]
+
+    p.x += p.speedX
+    p.y += p.speedY
+
+    p.life--
+    p.alpha = p.life / 40
+
+    // Slowing down
+    p.speedX *= 0.97
+    p.speedY *= 0.97
+
+    if (p.life <= 0) {
+      particles.splice(i, 1)
+    }
+  }
+}
+
 // COLLISIONS
 
 function isColliding(a, b) {
