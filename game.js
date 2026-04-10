@@ -20,6 +20,8 @@ let level = 1
 let health = 100
 let gameOver = false
 
+let gameStarted = false
+
 let nextLevelScore = 100
 
 let healthPack = null
@@ -54,6 +56,11 @@ const keys = {
 window.addEventListener('keydown', (e) => {
   if (keys.hasOwnProperty(e.key)) {
     keys[e.key] = true
+  }
+
+  if (!gameStarted) {
+    gameStarted = true
+    return
   }
 })
 
@@ -439,6 +446,8 @@ function drawBullets() {
 }
 
 function drawUI() {
+  ctx.textAlign = 'left'
+
   ctx.fillStyle = 'white'
   ctx.font = '20px Arial'
   ctx.fillText(`SCORE: ${score}`, 20, 35)
@@ -509,6 +518,8 @@ function drawParticles() {
 }
 
 function update() {
+  if (!gameStarted) return
+
   if (gameOver) return
 
   updatePlayer()
@@ -525,6 +536,26 @@ function update() {
 }
 
 function draw() {
+  if (!gameStarted) {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.8)'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    ctx.fillStyle = 'white'
+    ctx.textAlign = 'center'
+
+    ctx.font = '48px Arial'
+    ctx.fillText('ARE YOU READY?', canvas.width / 2, canvas.height / 2 - 40)
+
+    ctx.font = '24px Arial'
+    ctx.fillText(
+      'Press any key to start',
+      canvas.width / 2,
+      canvas.height / 2 + 20,
+    )
+
+    return
+  }
+
   ctx.clearRect(0, 0, canvas.width, canvas.height)
 
   for (const green of greens) {
