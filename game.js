@@ -21,6 +21,7 @@ let health = 100
 let gameOver = false
 
 let gameStarted = false
+let paused = false
 
 let nextLevelScore = 100
 
@@ -54,7 +55,15 @@ const keys = {
 }
 
 window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && gameStarted && !gameOver) {
+    paused = !paused
+    return
+  }
   if (keys.hasOwnProperty(e.key)) {
+    if (paused) {
+      paused = false
+      return
+    }
     keys[e.key] = true
   }
 
@@ -520,6 +529,8 @@ function drawParticles() {
 function update() {
   if (!gameStarted) return
 
+  if (paused) return
+
   if (gameOver) return
 
   updatePlayer()
@@ -551,6 +562,26 @@ function draw() {
       'Press any key to start',
       canvas.width / 2,
       canvas.height / 2 + 20,
+    )
+
+    return
+  }
+
+  if (paused) {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.75)'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    ctx.fillStyle = 'white'
+    ctx.textAlign = 'center'
+
+    ctx.font = '52px Arial'
+    ctx.fillText('PAUSE', canvas.width / 2, canvas.height / 2 - 20)
+
+    ctx.font = '24px Arial'
+    ctx.fillText(
+      'Press any key to continue',
+      canvas.width / 2,
+      canvas.height / 2 + 35,
     )
 
     return
