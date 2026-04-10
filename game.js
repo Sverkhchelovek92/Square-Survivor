@@ -471,6 +471,14 @@ function drawUI() {
 function drawHealthPack() {
   if (!healthPack) return
 
+  if (healthPack.lifeTime < 120) {
+    const blink = Math.floor(healthPack.lifeTime / 10) % 2
+
+    if (blink === 0) {
+      return
+    }
+  }
+
   ctx.fillStyle = 'white'
 
   ctx.fillRect(
