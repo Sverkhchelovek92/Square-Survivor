@@ -41,6 +41,10 @@ const mouse = {
 let canShoot = true
 const shootCooldown = 250
 
+let weaponLevel = 0
+let nextWeaponDropKills = 10
+let weaponDrop = null
+
 // KEYS
 
 const keys = {
@@ -212,6 +216,18 @@ function shoot() {
     speedX: (dx / length) * speed,
     speedY: (dy / length) * speed,
   })
+}
+
+// WEAPON DROPS
+
+function spawnWeaponDrop() {
+  weaponDrop = {
+    x: random(40, canvas.width - 40),
+    y: random(40, canvas.height - 40),
+    size: 24,
+    type: weaponLevel === 0 ? 'rapid' : 'double',
+    lifeTime: 600,
+  }
 }
 
 // UPDATE FUNCTIONS
