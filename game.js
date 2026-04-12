@@ -327,6 +327,21 @@ function updateParticles() {
   }
 }
 
+function updateWeaponDrop() {
+  if (!weaponDrop && kills >= nextWeaponDropKills) {
+    spawnWeaponDrop()
+    nextWeaponDropKills += 10
+  }
+
+  if (weaponDrop) {
+    weaponDrop.lifeTime--
+
+    if (weaponDrop.lifeTime <= 0) {
+      weaponDrop = null
+    }
+  }
+}
+
 // COLLISIONS
 
 function isColliding(a, b) {
@@ -557,6 +572,7 @@ function update() {
   updateHealthPack()
   handleCollisions()
   updateLevel()
+  updateWeaponDrop()
 
   spawnGreen()
   spawnRed()
