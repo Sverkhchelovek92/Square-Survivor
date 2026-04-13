@@ -376,6 +376,8 @@ function handleCollisions() {
 
       health -= red.value * 10
 
+      weaponLevel = 0
+
       if (health <= 0) {
         health = 0
         gameOver = true
@@ -428,6 +430,15 @@ function handleCollisions() {
         break
       }
     }
+  }
+
+  // Weapon Drop
+  if (weaponDrop && isColliding(player, weaponDrop)) {
+    if (weaponLevel < 2) {
+      weaponLevel++
+    }
+
+    weaponDrop = null
   }
 }
 
