@@ -528,6 +528,25 @@ function drawBullets() {
   }
 }
 
+function drawWeaponDrop() {
+  if (!weaponDrop) return
+
+  ctx.fillStyle = weaponDrop.type === 'rapid' ? '#ffd93c' : '#3ca0ff'
+  ctx.fillRect(weaponDrop.x, weaponDrop.y, weaponDrop.size, weaponDrop.size)
+
+  ctx.fillStyle = 'black'
+  ctx.font = '14px Arial'
+  ctx.textAlign = 'center'
+
+  ctx.fillText(
+    weaponDrop.type === 'rapid' ? 'R' : 'D',
+    weaponDrop.x + weaponDrop.size / 2,
+    weaponDrop.y + weaponDrop.size / 2 + 5,
+  )
+
+  ctx.textAlign = 'left'
+}
+
 function drawUI() {
   ctx.textAlign = 'left'
 
@@ -673,6 +692,7 @@ function draw() {
   }
 
   drawHealthPack()
+  drawWeaponDrop()
   drawParticles()
   drawBullets()
   drawPlayer()
