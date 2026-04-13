@@ -39,9 +39,15 @@ const mouse = {
 }
 
 let canShoot = true
-const shootCooldown = 250
+// const shootCooldown = 250
 
 let weaponLevel = 0
+
+function getShootCooldown() {
+  if (weaponLevel === 0) return 250
+  if (weaponLevel === 1) return 140
+  if (weaponLevel === 2) return 120
+}
 let nextWeaponDropKills = 10
 let weaponDrop = null
 
@@ -98,7 +104,7 @@ window.addEventListener('mousedown', (e) => {
 
   setTimeout(() => {
     canShoot = true
-  }, shootCooldown)
+  }, getShootCooldown())
 })
 
 // ENEMIES
