@@ -215,13 +215,39 @@ function shoot() {
 
   const speed = 8
 
-  bullets.push({
-    x: centerX,
-    y: centerY,
-    size: 8,
-    speedX: (dx / length) * speed,
-    speedY: (dy / length) * speed,
-  })
+  const dirX = dx / length
+  const dirY = dy / length
+
+  if (weaponLevel < 2) {
+    bullets.push({
+      x: centerX,
+      y: centerY,
+      size: 8,
+      speedX: dirX * speed,
+      speedY: dirY * speed,
+    })
+  } else {
+    const offset = 6
+
+    const perpX = -dirY
+    const perpY = dirX
+
+    bullets.push({
+      x: centerX + perpX * offset,
+      y: centerY + perpY * offset,
+      size: 8,
+      speedX: dirX * speed,
+      speedY: dirY * speed,
+    })
+
+    bullets.push({
+      x: centerX - perpX * offset,
+      y: centerY - perpY * offset,
+      size: 8,
+      speedX: dirX * speed,
+      speedY: dirY * speed,
+    })
+  }
 }
 
 // WEAPON DROPS
