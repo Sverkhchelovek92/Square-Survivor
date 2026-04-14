@@ -531,6 +531,14 @@ function drawBullets() {
 function drawWeaponDrop() {
   if (!weaponDrop) return
 
+  if (weaponDrop.lifeTime < 120) {
+    const blink = Math.floor(weaponDrop.lifeTime / 10) % 2
+
+    if (blink === 0) {
+      return
+    }
+  }
+
   ctx.fillStyle = weaponDrop.type === 'rapid' ? '#ffd93c' : '#3ca0ff'
   ctx.fillRect(weaponDrop.x, weaponDrop.y, weaponDrop.size, weaponDrop.size)
 
