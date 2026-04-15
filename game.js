@@ -28,6 +28,8 @@ let nextLevelScore = 100
 let healthPack = null
 let nextHealthPackScore = 250
 
+let levelTextTimer = 0
+
 // SHOOTING CONSTANTS
 
 const bullets = []
@@ -479,6 +481,7 @@ function handleCollisions() {
 function updateLevel() {
   if (score >= nextLevelScore) {
     level++
+    levelTextTimer = 60
     nextLevelScore += level * 100
 
     // New Red Spawns
@@ -627,6 +630,27 @@ function drawParticles() {
   }
 }
 
+function drawLevelText() {
+  if (levelTextTimer <= 0) return
+
+  const alpha = levelTextTimer / 60
+
+  ctx.save()
+
+  ctx.globalAlpha = alpha
+  ctx.fillStyle = 'white'
+  ctx.textAlign = 'center'
+
+  const scale = 1 + (1 - alpha) * 0.5
+  ctx.font = `${48 * scale}px Arial`
+
+  ctx.fillText(`LEVEL ${level}`, canvas.width / 2, canvas.height / 2)
+
+  ctx.restore()
+
+  levelTextTimer--
+}
+
 function update() {
   if (!gameStarted) return
 
@@ -705,6 +729,8 @@ function draw() {
   drawBullets()
   drawPlayer()
   drawUI()
+
+  drawLevelText()
 
   if (gameOver) {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'
