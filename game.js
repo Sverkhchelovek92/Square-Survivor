@@ -53,6 +53,16 @@ function getShootCooldown() {
 let nextWeaponDropKills = 10
 let weaponDrop = null
 
+// SOUNDS
+
+const sounds = {
+  shoot: new Audio('sounds/shoot.wav'),
+  kill: new Audio('sounds/kill.wav'),
+  pickup: new Audio('sounds/pickup.wav'),
+  damage: new Audio('sounds/damage.wav'),
+  levelup: new Audio('sounds/levelup.mp3'),
+}
+
 // KEYS
 
 const keys = {
