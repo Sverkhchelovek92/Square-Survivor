@@ -584,7 +584,7 @@ function drawUI() {
   ctx.font = '14px Arial'
   ctx.fillText(`HEALTH: ${Math.floor(health)} / 100`, 25, 125)
 
-  ctx.fillText('WASD / a← ↑ → ↓ — movement', 20, 155)
+  ctx.fillText('WASD / ← ↑ → ↓ — movement', 20, 155)
 }
 
 function drawHealthPack() {
