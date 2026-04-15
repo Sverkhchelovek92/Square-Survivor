@@ -63,6 +63,11 @@ const sounds = {
   levelup: new Audio('sounds/levelup.mp3'),
 }
 
+function playSound(sound) {
+  sound.currentTime = 0
+  sound.play()
+}
+
 // KEYS
 
 const keys = {
@@ -229,6 +234,8 @@ function shoot() {
 
   const dirX = dx / length
   const dirY = dy / length
+
+  playSound(sounds.shoot)
 
   if (weaponLevel < 2) {
     bullets.push({
@@ -405,6 +412,7 @@ function handleCollisions() {
     if (isColliding(player, green)) {
       greens.splice(i, 1)
 
+      playSound(sounds.pickup)
       score += green.value
 
       spawnGreen()
@@ -418,6 +426,7 @@ function handleCollisions() {
     if (isColliding(player, red)) {
       reds.splice(i, 1)
 
+      playSound(sounds.damage)
       health -= red.value * 10
 
       weaponLevel = 0
@@ -435,6 +444,7 @@ function handleCollisions() {
   if (healthPack && isColliding(player, healthPack)) {
     health += 35
 
+    playSound(sounds.pickup)
     if (health > 100) {
       health = 100
     }
@@ -458,6 +468,7 @@ function handleCollisions() {
       if (hit) {
         bullets.splice(i, 1)
 
+        playSound(sounds.kill)
         createExplosion(
           red.x + red.size / 2,
           red.y + red.size / 2,
@@ -478,6 +489,7 @@ function handleCollisions() {
 
   // Weapon Drop
   if (weaponDrop && isColliding(player, weaponDrop)) {
+    playSound(sounds.pickup)
     if (weaponLevel < 2) {
       weaponLevel++
     }
@@ -491,6 +503,7 @@ function handleCollisions() {
 function updateLevel() {
   if (score >= nextLevelScore) {
     level++
+    playSound(sounds.levelup)
     levelTextTimer = 60
     nextLevelScore += level * 100
 
