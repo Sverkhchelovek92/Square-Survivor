@@ -63,6 +63,12 @@ const sounds = {
   levelup: new Audio('sounds/levelup.mp3'),
 }
 
+sounds.shoot.volume = 0.4
+sounds.kill.volume = 0.8
+sounds.pickup.volume = 0.8
+sounds.damage.volume = 0.8
+sounds.levelup.volume = 0.2
+
 function playSound(sound) {
   sound.currentTime = 0
   sound.play()
