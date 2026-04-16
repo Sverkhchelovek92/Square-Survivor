@@ -498,6 +498,11 @@ function handleCollisions() {
     playSound(sounds.pickup)
     if (weaponLevel < 2) {
       weaponLevel++
+    } else {
+      score += 30
+      health += 10
+
+      if (health > 100) health = 100
     }
 
     weaponDrop = null
