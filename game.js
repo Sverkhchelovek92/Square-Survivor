@@ -432,6 +432,13 @@ function handleCollisions() {
     const red = reds[i]
 
     if (isColliding(player, red)) {
+      const dx = player.x - red.x
+      const dy = player.y - red.y
+
+      const length = Math.sqrt(dx * dx + dy * dy) || 1
+
+      player.x += (dx / length) * 10
+      player.y += (dy / length) * 10
       reds.splice(i, 1)
 
       playSound(sounds.damage)
