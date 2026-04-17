@@ -30,6 +30,8 @@ let nextHealthPackScore = 250
 
 let levelTextTimer = 0
 
+let damageFlash = 0
+
 // SHOOTING CONSTANTS
 
 const bullets = []
@@ -434,6 +436,7 @@ function handleCollisions() {
 
       playSound(sounds.damage)
       health -= red.value * 10
+      damageFlash = 10
 
       weaponLevel = 0
 
@@ -685,6 +688,15 @@ function drawLevelText() {
   levelTextTimer--
 }
 
+function drawDamageFlash() {
+  if (damageFlash <= 0) return
+
+  ctx.fillStyle = `rgba(255, 0, 0, ${damageFlash / 20})`
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+  damageFlash--
+}
+
 function update() {
   if (!gameStarted) return
 
@@ -763,6 +775,8 @@ function draw() {
   drawBullets()
   drawPlayer()
   drawUI()
+
+  drawDamageFlash()
 
   drawLevelText()
 
