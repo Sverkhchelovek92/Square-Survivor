@@ -733,10 +733,10 @@ function draw() {
     ctx.fillStyle = 'white'
     ctx.textAlign = 'center'
 
-    ctx.font = '48px Arial'
-    ctx.fillText('ARE YOU READY?', canvas.width / 2, canvas.height / 2 - 40)
+    ctx.font = "64px 'Press Start 2P'"
+    ctx.fillText('SQUARE SURVIVOR', canvas.width / 2, canvas.height / 2 - 60)
 
-    ctx.font = '24px Arial'
+    ctx.font = "20px 'Press Start 2P'"
     ctx.fillText(
       'Press any key to start',
       canvas.width / 2,
