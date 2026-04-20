@@ -32,6 +32,8 @@ let levelTextTimer = 0
 
 let damageFlash = 0
 
+let titleTime = 0
+
 // SHOOTING CONSTANTS
 
 const bullets = []
@@ -807,10 +809,10 @@ function draw() {
     ctx.fillStyle = 'white'
     ctx.textAlign = 'center'
 
-    ctx.font = '48px Arial'
+    ctx.font = "48px 'Press Start 2P'"
     ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 20)
 
-    ctx.font = '24px Arial'
+    ctx.font = "24px 'Press Start 2P'"
     ctx.fillText(
       `Final Score: ${score}`,
       canvas.width / 2,
@@ -822,7 +824,7 @@ function draw() {
       canvas.height / 2 + 65,
     )
 
-    ctx.font = '18px Arial'
+    ctx.font = "18px 'Press Start 2P'"
     ctx.fillText(
       'Refresh page to restart',
       canvas.width / 2,
