@@ -605,33 +605,31 @@ function drawWeaponDrop() {
 function drawUI() {
   ctx.textAlign = 'left'
 
-  ctx.fillStyle = 'white'
-  ctx.font = '20px Arial'
-  ctx.fillText(`SCORE: ${score}`, 20, 35)
-  ctx.fillText(`KILLS: ${kills}`, 20, 65)
-  ctx.fillText(`LEVEL: ${level}`, 20, 95)
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.5)'
+  ctx.fillRect(15, 15, 180, 90)
 
-  // Health bar
-  ctx.fillStyle = '#444'
-  ctx.fillRect(20, 110, 200, 20)
+  ctx.fillStyle = 'white'
+  ctx.font = "10px 'Press Start 2P'"
+
+  ctx.fillText(`SCORE ${score}`, 25, 35)
+
+  ctx.fillText(`KILLS ${kills}`, 25, 55)
+
+  ctx.fillText(`LEVEL ${level}`, 25, 75)
+
+  // health bar
+  ctx.fillStyle = '#333'
+  ctx.fillRect(25, 85, 140, 10)
 
   let healthColor = '#3cff6b'
-
   if (health < 60) healthColor = '#ffd93c'
   if (health < 30) healthColor = '#ff3b3b'
 
   ctx.fillStyle = healthColor
-  ctx.fillRect(20, 110, health * 2, 20)
+  ctx.fillRect(25, 85, (health / 100) * 140, 10)
 
   ctx.strokeStyle = 'white'
-  ctx.lineWidth = 2
-  ctx.strokeRect(20, 110, 200, 20)
-
-  ctx.fillStyle = 'white'
-  ctx.font = '14px Arial'
-  ctx.fillText(`HEALTH: ${Math.floor(health)} / 100`, 25, 125)
-
-  ctx.fillText('WASD / ← ↑ → ↓ — movement', 20, 155)
+  ctx.strokeRect(25, 85, 140, 10)
 }
 
 function drawHealthPack() {
@@ -753,15 +751,30 @@ function draw() {
     ctx.fillStyle = 'white'
     ctx.textAlign = 'center'
 
-    ctx.font = '52px Arial'
+    ctx.font = "52px 'Press Start 2P'"
     ctx.fillText('PAUSE', canvas.width / 2, canvas.height / 2 - 20)
 
-    ctx.font = '24px Arial'
+    ctx.font = "24px 'Press Start 2P'"
     ctx.fillText(
       'Press any key to continue',
       canvas.width / 2,
       canvas.height / 2 + 35,
     )
+
+    ctx.font = "14px 'Press Start 2P'"
+    ctx.fillStyle = 'white'
+
+    ctx.fillText(
+      'WASD / ARROWS — MOVE',
+      canvas.width / 2,
+      canvas.height / 2 + 70,
+    )
+
+    ctx.fillText('MOUSE — AIM', canvas.width / 2, canvas.height / 2 + 95)
+
+    ctx.fillText('CLICK — SHOOT', canvas.width / 2, canvas.height / 2 + 120)
+
+    ctx.fillText('ESC — PAUSE', canvas.width / 2, canvas.height / 2 + 145)
 
     return
   }
